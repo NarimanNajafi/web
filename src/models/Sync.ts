@@ -1,7 +1,11 @@
 import axios, { AxiosPromise, AxiosResponse } from 'axios';
 import { UserProps } from './User';
 
-export class Sync {
+interface HasId {
+  id: number;
+}
+
+export class Sync<T extends HasId> {
   constructor(public rootUrl: string) {}
 
   fetch(id: number): AxiosPromise {
