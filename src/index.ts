@@ -2,8 +2,13 @@ import { User } from './models/User';
 
 const user = new User({ name: ' new record', age: 0 });
 
-user.events.on('change', () => {
-  console.log('change!');
-});
+class Person {
+  constructor(public firstName: string, public lastName: string) {}
 
-user.events.trigger('cgange');
+  get fullName(): string {
+    return `${this.firstName} ${this.lastName}`;
+  }
+}
+
+const person = new Person('firsName', 'lastName');
+console.log(person.fullName);
