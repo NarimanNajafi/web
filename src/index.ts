@@ -1,14 +1,9 @@
-import { User } from './models/User';
+import { Collection } from './models/Collection';
 
-const user = new User({ name: ' new record', age: 0 });
+const collection = new Collection('http://localhost:3000/users');
 
-class Person {
-  constructor(public firstName: string, public lastName: string) {}
+collection.on('change', () => {
+  console.log(collection);
+});
 
-  get fullName(): string {
-    return `${this.firstName} ${this.lastName}`;
-  }
-}
-
-const person = new Person('firsName', 'lastName');
-console.log(person.fullName);
+collection.fetch();
