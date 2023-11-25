@@ -1,7 +1,6 @@
-import { log } from 'console';
-
+import { User } from '../models/User';
 export class UserForm {
-  constructor(public parent: Element) {}
+  constructor(public parent: Element, public model: User) {}
 
   eventsMap(): { [key: string]: () => void } {
     return {
@@ -11,7 +10,7 @@ export class UserForm {
   }
 
   onHeaderHover(): void {
-    console.log('hover was hover over!');
+    console.log('h1 was hovered over!');
   }
 
   onButtonClick(): void {
@@ -22,6 +21,8 @@ export class UserForm {
     return `
     <div>
       <h1>User Form </h1>
+      <div>User Name:${this.model.get('name')}</div>
+      <div>Age:${this.model.get('age')}</div>
       <input />
       <button>Click Me!</button>
     </div>
@@ -31,11 +32,11 @@ export class UserForm {
   bindEvents(fragment: DocumentFragment): void {
     const eventsMap = this.eventsMap();
 
-    for (let eventkey in eventsMap) {
-      const [eventName, selector] = eventkey.split(';');
+    for (let eventKey in eventsMap) {
+      const [eventName, selector] = eventKey.split(':');
 
       fragment.querySelectorAll(selector).forEach((element) => {
-        element.addEventListener(eventName, eventsMap[eventkey]);
+        element.addEventListener(eventName, eventsMap[eventKey]);
       });
     }
   }
