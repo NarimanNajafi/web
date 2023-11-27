@@ -15,5 +15,7 @@ export abstract class CollectiomView<T, K> {
       this.renderItem(model, itemParent);
       templateElement.content.append(itemParent);
     }
+
+    this.parent.append(templateElement.content);
   }
 }
